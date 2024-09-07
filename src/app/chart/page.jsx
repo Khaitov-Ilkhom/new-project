@@ -32,7 +32,7 @@ export const options = {
   plugins: {
     title: {
       display: true,
-      text: "Bitcoin Price in USD",
+      text: "Cryptocurrency Price in USD",
     },
   },
   scales: {
@@ -49,7 +49,7 @@ const Chart = () => {
     labels: [],
     datasets: [
       {
-        label: "Bitcoin Price (USD)",
+        label: "Price (USD)",
         data: [],
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
@@ -58,11 +58,12 @@ const Chart = () => {
     ],
   });
   const [timeRange, setTimeRange] = useState("30");
+  const [cryptoId, setCryptoId] = useState("bitcoin");
 
   const fetchData = async (days) => {
     try {
       const response = await axios.get(
-        "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart",
+        `https://api.coingecko.com/api/v3/coins/${cryptoId}/market_chart`,
         {
           params: {
             vs_currency: "usd",
@@ -76,14 +77,14 @@ const Chart = () => {
         const date = new Date(price[0]);
         return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
       });
-      const bitcoinPrices = prices.map((price) => price[1]);
+      const cryptoPrices = prices.map((price) => price[1]);
 
       setData({
         labels,
         datasets: [
           {
-            label: "Bitcoin Price (USD)",
-            data: bitcoinPrices,
+            label: `Price (USD) - ${cryptoId}`,
+            data: cryptoPrices,
             borderColor: "rgb(53, 162, 235)",
             backgroundColor: "rgba(53, 162, 235, 0.5)",
             yAxisID: "y",
@@ -91,20 +92,23 @@ const Chart = () => {
         ],
       });
     } catch (error) {
-      console.error("Error fetching Bitcoin data:", error);
+      console.error("Error fetching cryptocurrency data:", error);
     }
   };
 
   useEffect(() => {
     fetchData(timeRange);
-  }, [timeRange]);
+  }, [timeRange, cryptoId]);
 
   return (
     <div className="container mx-auto py-24 -mt-36">
       <div className="text-left mt-10">
-        <h1 className="text-3xl font-medium text-black">Bitcoin Price Chart</h1>
+        <h1 className="text-3xl font-medium text-black">
+          Cryptocurrency Price Chart
+        </h1>
         <p className="text-xl text-gray-500 py-5">
-          Bitcoin price in USD for the last {timeRange} days
+          {cryptoId.charAt(0).toUpperCase() + cryptoId.slice(1)} price in USD
+          for the last {timeRange} days
         </p>
       </div>
 
