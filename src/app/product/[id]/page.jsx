@@ -1,4 +1,5 @@
 "use client";
+import Chart from "@/app/chart/page"; // Make sure the chart component is properly set up
 import { Image } from "antd";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -43,12 +44,13 @@ const Single = () => {
   return (
     <div className="Single pt-20 bg-gray-900 text-white min-h-screen">
       <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row items-center">
-          <div className="w-full md:w-1/3 mb-8 md:mb-0">
+        <div className="flex  md:flex-row items-start">
+          {/* Left Side: Coin Information */}
+          <div className="w-full md:w-1/3 mb-8 md:mb-0 text-center md:text-left">
             <Image
               src={coin.image.large}
               alt={coin.name}
-              className="rounded-lg shadow-lg mb-6"
+              className="rounded-lg shadow-lg mb-6 w-24 mx-auto md:w-auto"
             />
             <h1 className="text-4xl font-bold mb-4">{coin.name}</h1>
             <p className="text-gray-300 mb-4">
@@ -77,23 +79,10 @@ const Single = () => {
               </span>
             </p>
           </div>
+
           <div className="w-full md:w-2/3">
-            <div className="bg-gray-800 rounded-lg shadow-lg p-6 h-64">
-              <p className="text-center">Graph/Chart Placeholder</p>
-            </div>
-            <div className="flex justify-around mt-6">
-              <button className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700">
-                24 Hours
-              </button>
-              <button className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700">
-                30 Days
-              </button>
-              <button className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700">
-                3 Months
-              </button>
-              <button className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700">
-                1 Year
-              </button>
+            <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+              <Chart />
             </div>
           </div>
         </div>

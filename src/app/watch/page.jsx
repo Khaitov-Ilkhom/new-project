@@ -43,12 +43,12 @@ const Watch = () => {
       </div>
 
       <div
-        className={`Scrol fixed top-0 right-0 w-80 z-10 h-full bg-gray-800 shadow-lg transform transition-transform duration-300 ease-in-out overflow-y-auto ${
+        className={`fixed top-0 right-0 w-80 z-10 h-full bg-gray-800 shadow-lg transform transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="p-4">
-          <div className="flex justify-between items-center ">
+          <div className="flex justify-between items-center">
             <h2 className="text-white font-bold text-lg">Watchlist</h2>
             <button
               onClick={toggleSidebar}
