@@ -10,7 +10,9 @@ const Header = () => {
           <div className="header flex items-center justify-around">
             <div className="header-one">
               <Link href="/home">
-                <h2 className="text-cyan-600 font-sans font-semibold">Ilhom</h2>
+                <h2 className="text-cyan-600 font-sans font-semibold">
+                  CRYPTOFOLIO
+                </h2>
               </Link>
             </div>
             <div className="header-two flex items-center gap-3">

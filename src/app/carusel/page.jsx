@@ -1,9 +1,7 @@
-"use client";
-import { useState } from "react";
-import Image from "next/image";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import { Image } from "antd";
 
 const coinsData = [
   {
@@ -322,6 +320,8 @@ const Corusel = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
     afterChange: (index) => setActiveIndex(index),
   };
 
@@ -330,7 +330,7 @@ const Corusel = () => {
       <Slider {...settings} className="max-w-4xl mx-auto">
         {coinsData.map((coin, index) => (
           <div key={coin.id} className="p-4">
-            <div className={` rounded-lg shadow-md `}>
+            <div className={`rounded-lg shadow-md`}>
               <div className="flex items-center justify-center ">
                 <Image
                   src={coin.image}
@@ -341,8 +341,7 @@ const Corusel = () => {
                 />
               </div>
               <div className="flex justify-center items-center mt-4 gap-2">
-                {" "}
-                <h3 className="text-xl font-semibold text-center text-white ">
+                <h3 className="text-xl font-semibold text-center text-white">
                   {coin.symbol.toLocaleUpperCase()}
                 </h3>
                 <p
@@ -355,7 +354,6 @@ const Corusel = () => {
                   {coin.price_change_percentage_24h.toFixed(2)}%
                 </p>
               </div>
-
               <p className="text-center text-gray-600">
                 ${coin.current_price.toFixed(2)}
               </p>
@@ -366,4 +364,5 @@ const Corusel = () => {
     </div>
   );
 };
+
 export default Corusel;

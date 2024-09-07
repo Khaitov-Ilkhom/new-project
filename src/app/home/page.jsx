@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { addToLiked } from "../redux/slice/likeSlice";
 import { Image } from "antd";
+import Corusel from "../carusel/page";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -12,13 +13,13 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 100;
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await fetch(
-          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=gecko_desc&per_page=${itemsPerPage}&page=${currentPage}&sparkline=false&price_change_percentage=24h`
+          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=gecko_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h`
         );
         if (!res.ok) {
           throw new Error("Failed to fetch data");
@@ -32,7 +33,7 @@ const Home = () => {
     };
 
     fetchData();
-  }, [currentPage]);
+  }, []);
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
@@ -63,7 +64,7 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-slate-900 min-h-screen flex flex-col">
+    <div className="Scrol  bg-slate-900 min-h-screen flex flex-col">
       <div className="bg-[url('https://s3-alpha-sig.figma.com/img/caf5/016f/97f154adfd88d0e48d9a7fc87e5ab035?Expires=1725840000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Kg4PMGrJSCVdN5EBvKIHjtCPRoi-0nXmqBnTlNqtEiFlDIAW16Fwp7n8V1S8svJ0RTd9x49QpfVKpkqSmtYvv~GjIubdF9niiT3HARsyFoZkoTQ08G-m9uLcxrCv5yB7JBaSIelBTSag0nygPKP9g6zIEN4Vm3hljsww5cVWw0lap592eTt10GeEB~f1tz2AuF8GM2~9lbuf4~9dSFnfncs8-cSuVYlqD9m841fVUetMCNiRMu~RCIIFl-dulJUzzeU401ROQPkZFTWFbc4T9EO0AAGbtTuTma3c7DAGymsVexGhU9rRtXbzGQOpKDlPN7TEKnwwUk3iLAGvueY8EQ__')] w-full bg-cover bg-center pt-20 pb-20 flex items-center justify-center">
         <div className="text-center text-white">
           <h1 className="text-cyan-600 text-4xl font-semibold mb-4">
@@ -72,7 +73,9 @@ const Home = () => {
           <p className="text-gray-300 text-lg">
             Get all the info regarding your favorite Cryptocurrency
           </p>
-          <div className="mt-10">{/* <Corusel /> */}</div>
+          <div className="mt-10">
+            <Corusel />
+          </div>
         </div>
       </div>
       <div className="container mx-auto flex-grow">
@@ -109,7 +112,7 @@ const Home = () => {
                       <tr key={coin.id} className="border-b border-gray-700">
                         <td className="py-4 px-4">
                           <Link href={`/product/${coin.id}`}>
-                            <div className="flex items-center">
+                            <div className="flex items-center gap-3">
                               <Image
                                 width={42}
                                 height={42}
