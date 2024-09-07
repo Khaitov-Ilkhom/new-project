@@ -64,13 +64,13 @@ const Home = () => {
   };
 
   return (
-    <div className="Scrol  bg-slate-900 min-h-screen flex flex-col">
+    <div className="Scrol bg-slate-900 min-h-screen flex flex-col">
       <div className="bg-[url('https://s3-alpha-sig.figma.com/img/caf5/016f/97f154adfd88d0e48d9a7fc87e5ab035?Expires=1725840000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Kg4PMGrJSCVdN5EBvKIHjtCPRoi-0nXmqBnTlNqtEiFlDIAW16Fwp7n8V1S8svJ0RTd9x49QpfVKpkqSmtYvv~GjIubdF9niiT3HARsyFoZkoTQ08G-m9uLcxrCv5yB7JBaSIelBTSag0nygPKP9g6zIEN4Vm3hljsww5cVWw0lap592eTt10GeEB~f1tz2AuF8GM2~9lbuf4~9dSFnfncs8-cSuVYlqD9m841fVUetMCNiRMu~RCIIFl-dulJUzzeU401ROQPkZFTWFbc4T9EO0AAGbtTuTma3c7DAGymsVexGhU9rRtXbzGQOpKDlPN7TEKnwwUk3iLAGvueY8EQ__')] w-full bg-cover bg-center pt-20 pb-20 flex items-center justify-center">
         <div className="text-center text-white">
-          <h1 className="text-cyan-600 text-4xl font-semibold mb-4">
+          <h1 className="text-cyan-600 text-3xl sm:text-4xl font-semibold mb-4">
             CRYPTOFOLIO WATCH LIST
           </h1>
-          <p className="text-gray-300 text-lg">
+          <p className="text-gray-300 text-base sm:text-lg">
             Get all the info regarding your favorite Cryptocurrency
           </p>
           <div className="mt-10">
@@ -79,29 +79,29 @@ const Home = () => {
         </div>
       </div>
       <div className="container mx-auto flex-grow">
-        <div className="flex flex-col items-center p-6 gap-6">
-          <h2 className="text-white text-2xl mb-4">
+        <div className="flex flex-col items-center p-4 sm:p-6 gap-4 sm:gap-6">
+          <h2 className="text-white text-xl sm:text-2xl mb-4">
             Cryptocurrency Prices by Market Cap
           </h2>
           <input
             type="text"
             placeholder="Search..."
-            className="w-full max-w-md p-3 rounded-md bg-slate-800 border border-gray-700 text-white outline-none focus:border-cyan-600"
+            className="w-full p-3 rounded-md bg-slate-800 border border-gray-700 text-white outline-none focus:border-cyan-600"
             onChange={(e) => setSearch(e.target.value)}
           />
           {error && <p className="text-red-500">{error}</p>}
           {!error && paginatedData.length > 0 && (
             <>
-              <table className="table-auto w-full max-w-3xl text-left text-white">
+              <table className="table-auto w-full text-left text-white">
                 <thead>
-                  <tr className="bg-cyan-600">
+                  <tr className="bg-cyan-600 text-sm sm:text-base">
                     <th className="py-2 px-4">Coin</th>
                     <th className="py-2 px-4">Price</th>
                     <th className="py-2 px-4">24h Change</th>
                     <th className="py-2 px-4">Market Cap</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-sm sm:text-base">
                   {paginatedData
                     .filter((coin) =>
                       search === ""
@@ -110,32 +110,32 @@ const Home = () => {
                     )
                     .map((coin) => (
                       <tr key={coin.id} className="border-b border-gray-700">
-                        <td className="py-4 px-4">
+                        <td className="py-4 px-2 sm:px-4">
                           <Link href={`/product/${coin.id}`}>
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2 sm:gap-3">
                               <Image
-                                width={42}
-                                height={42}
+                                width={32}
+                                height={32}
                                 src={coin.image}
                                 alt={coin.name}
-                                className="w-6 h-6 mr-2"
+                                className="w-5 h-5 sm:w-6 sm:h-6 mr-2"
                               />
                               <div>
-                                <p className="font-bold">
+                                <p className="font-bold text-sm sm:text-base">
                                   {coin.symbol.toUpperCase()}
                                 </p>
-                                <p className="text-gray-400 text-sm">
+                                <p className="text-gray-400 text-xs sm:text-sm">
                                   {coin.name}
                                 </p>
                               </div>
                             </div>
                           </Link>
                         </td>
-                        <td className="py-4 px-4">
+                        <td className="py-4 px-2 sm:px-4">
                           ₹{coin.current_price.toLocaleString()}
                         </td>
                         <td
-                          className={`py-4 px-4 ${
+                          className={`py-4 px-2 sm:px-4 ${
                             coin.price_change_percentage_24h >= 0
                               ? "text-green-500"
                               : "text-red-500"
@@ -147,34 +147,34 @@ const Home = () => {
                           >
                             {isProductLiked(coin.id) ? (
                               <FaEyeSlash
-                                size={24}
+                                size={20}
                                 className="mr-2 cursor-pointer"
                               />
                             ) : (
                               <FaEye
-                                size={24}
+                                size={20}
                                 className="mr-2 cursor-pointer"
                               />
                             )}
                             {coin.price_change_percentage_24h}%
                           </button>
                         </td>
-                        <td className="py-4 px-4">
+                        <td className="py-4 px-2 sm:px-4">
                           ₹{coin.market_cap.toLocaleString()}
                         </td>
                       </tr>
                     ))}
                 </tbody>
               </table>
-              <div className="flex justify-between w-full max-w-3xl mt-6">
+              <div className="flex flex-col sm:flex-row justify-between w-full mt-6">
                 <button
                   onClick={handlePreviousPage}
                   disabled={currentPage === 1}
-                  className="px-4 py-2 bg-cyan-600 text-black rounded hover:bg-cyan-700 disabled:opacity-50"
+                  className="px-4 py-2 bg-cyan-600 text-black rounded hover:bg-cyan-700 disabled:opacity-50 mb-4 sm:mb-0"
                 >
                   Previous
                 </button>
-                <span className="text-white">
+                <span className="text-white mb-4 sm:mb-0">
                   Page {currentPage} of {totalPages}
                 </span>
                 <button

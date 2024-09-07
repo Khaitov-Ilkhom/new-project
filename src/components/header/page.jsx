@@ -1,4 +1,6 @@
 "use client";
+import { useContext, useState } from "react";
+
 import Link from "next/link";
 import Watch from "@/app/watch/page";
 const Header = () => {
