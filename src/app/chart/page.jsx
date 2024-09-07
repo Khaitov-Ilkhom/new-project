@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+"use client"
+import {useEffect, useState} from "react";
 import axios from "axios";
 import {
   Chart as ChartJS,
@@ -10,16 +11,16 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import {Line} from "react-chartjs-2";
 
 ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
 );
 
 export const options = {
@@ -101,6 +102,7 @@ const Chart = () => {
   }, [timeRange, cryptoId]);
 
   return (
+
     <div className="container mx-auto py-24 -mt-36">
       <div className="text-left mt-10">
         <h1 className="text-3xl font-medium text-black">
@@ -112,46 +114,47 @@ const Chart = () => {
         </p>
       </div>
 
-      <div className="mt-20 w-full">
-        <div className="mx-auto w-full">
-          <Line options={options} data={data} />
+
+        <div className="mt-20 w-full">
+          <div className="mx-auto w-full">
+            <Line options={options} data={data}/>
+          </div>
+        </div>
+        <div className="flex justify-center mt-6 space-x-4">
+          <button
+              onClick={() => setTimeRange("1")}
+              className={`px-4 py-2 rounded-md ${
+                  timeRange === "1" ? "bg-blue-700" : "bg-blue-600"
+              } text-white hover:bg-blue-700`}
+          >
+            24 Hours
+          </button>
+          <button
+              onClick={() => setTimeRange("30")}
+              className={`px-4 py-2 rounded-md ${
+                  timeRange === "30" ? "bg-blue-700" : "bg-blue-600"
+              } text-white hover:bg-blue-700`}
+          >
+            30 Days
+          </button>
+          <button
+              onClick={() => setTimeRange("90")}
+              className={`px-4 py-2 rounded-md ${
+                  timeRange === "90" ? "bg-blue-700" : "bg-blue-600"
+              } text-white hover:bg-blue-700`}
+          >
+            3 Months
+          </button>
+          <button
+              onClick={() => setTimeRange("365")}
+              className={`px-4 py-2 rounded-md ${
+                  timeRange === "365" ? "bg-blue-700" : "bg-blue-600"
+              } text-white hover:bg-blue-700`}
+          >
+            1 Year
+          </button>
         </div>
       </div>
-      <div className="flex justify-center mt-6 space-x-4">
-        <button
-          onClick={() => setTimeRange("1")}
-          className={`px-4 py-2 rounded-md ${
-            timeRange === "1" ? "bg-blue-700" : "bg-blue-600"
-          } text-white hover:bg-blue-700`}
-        >
-          24 Hours
-        </button>
-        <button
-          onClick={() => setTimeRange("30")}
-          className={`px-4 py-2 rounded-md ${
-            timeRange === "30" ? "bg-blue-700" : "bg-blue-600"
-          } text-white hover:bg-blue-700`}
-        >
-          30 Days
-        </button>
-        <button
-          onClick={() => setTimeRange("90")}
-          className={`px-4 py-2 rounded-md ${
-            timeRange === "90" ? "bg-blue-700" : "bg-blue-600"
-          } text-white hover:bg-blue-700`}
-        >
-          3 Months
-        </button>
-        <button
-          onClick={() => setTimeRange("365")}
-          className={`px-4 py-2 rounded-md ${
-            timeRange === "365" ? "bg-blue-700" : "bg-blue-600"
-          } text-white hover:bg-blue-700`}
-        >
-          1 Year
-        </button>
-      </div>
-    </div>
   );
 };
 
